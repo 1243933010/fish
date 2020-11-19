@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "headers": "/components/header",
+    "w-picker": "/components/w-picker/w-picker"
+  }
+}

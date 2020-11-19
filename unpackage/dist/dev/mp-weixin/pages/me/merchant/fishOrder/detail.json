@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "uni-countdown": "/components/uni-countdown/uni-countdown",
+    "headers": "/components/header",
+    "popup": "/components/uni-popup/uni-popup",
+    "w-picker": "/components/w-picker/w-picker"
+  }
+}

@@ -1,0 +1,341 @@
+<template>
+	<view>
+		<view class="top_hr"></view>
+				<view class="rox">
+					<view class="header_">
+						<view class="header_top"></view>
+						<view class="header_box">
+							<view class="header_box_left">
+								<image class="header_box_left_img" @click="back" src="../../../../static/back.png" mode="widthFix"></image>
+								<!-- <text class="header_box_left_text"  >返回</text> -->
+							</view>
+							<view class="header_box_title">
+								<text class="header_box_left_text">选择位置</text>
+							</view>
+							<view class="header_box_right">
+								<text class="header_box_right_text" @click="update">确定</text>
+							</view>
+						</view>
+					</view>
+				</view>
+				<!-- <view class="map"> -->
+					<map style="width: 750rpx;" 
+					v-if="flog"
+					:style="{height:Height+'px'}" 
+					:latitude="latitude" 
+					:scale="10" 
+					:longitude="longitude"
+					:markers="covers"
+					@tap="tap"></map>
+				<!-- </view> -->
+				
+				<view class="search">
+					<input class="search_text" v-model="text" @confirm="search" type="text" placeholder="输入想搜索的地区" confirm-type="search"/>
+				</view>
+				
+				<uni-popup ref="search"  type="bottom">
+							<view class="search_con">
+								<scroll-view scroll-y="true" style="height: 600rpx;">
+								    <view class="search_item" v-for="(item,index) in searchList" :key="index" @click="chooseSearch(item,index)">
+								    	<view class="search_item_icon">
+								    		<text class="search_item_icon_name">{{item.pname}}{{item.cityname}}{{item.adname}}{{item.name}}</text>
+								    		<!-- <text class="search_item_icon_address">{{item.ground_address}}</text> -->
+								    	</view>
+								    </view>
+								</scroll-view>
+							</view>
+				</uni-popup>
+	</view>
+</template>
+
+
+
+<script>
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+
+	// import headers from '@/components/header.vue';
+	export default {
+		components:{uniPopup},
+		data() {
+			return {
+			  Height:'',
+			  longitude:0,
+			  latitude:0,
+			  covers: [],
+			text:'',
+			searchList:[],
+			flog:true
+			}
+		},
+		onLoad(e) {
+			let data = JSON.parse(e.addressObj);
+			this.longitude = data.ground_longitude;
+			this.latitude = data.ground_atitude;
+			// this.longitude = 114.060688;
+			// this.latitude = 22.626353;
+			this.covers[0].latitude = data.ground_atitude;
+			this.covers[0].longitude = data.ground_longitude;
+			// console.log(this.latitude)
+		},
+		mounted() {
+		 uni.getSystemInfo({
+		 	success: (res) => {
+				this.Height = res.windowHeight-85;
+		 		// console.log(res.windowHeight)
+		 	}
+		 })	
+		 // this.search();
+		},
+		methods: {
+			chooseSearch(item,index){
+				console.log(item)
+				this.latitude = item.latitude;
+				this.longitude = item.longitude;
+				// getApp().globalData.editAddress = {latitude:this.latitude,longitude:this.longitude};
+				let obj = {
+				        latitude: item.latitude,
+				        longitude: item.longitude,
+				        iconPath: '../../../../static/address.png',
+						width: 35,
+						height: 35,
+					}
+					this.covers=[obj];
+				// uni.showToast({
+				// 	icon:'none',
+				// 	title:`您已选取地址:${item.formatted_address}`
+				// })
+				this.$refs.search.close();
+			},
+			search(){
+				uni.request({
+					method:'GET',
+					url:`https://restapi.amap.com/v3/place/text?keywords=${this.text}&city=beijing&output=json&offset=20&page=1&key=099d6574c94a8fd6e4f7f76e5c586b83&extensions=all`,
+					// url:`https://restapi.amap.com/v3/geocode/geo?address=${this.text}&output=JSON&key=099d6574c94a8fd6e4f7f76e5c586b83`,
+					success:(res)=> {
+						console.log(res)
+						if(res.data.status==='1'){
+							this.searchList = res.data.pois;
+							res.data.pois.forEach((val,ind)=>{
+								let arr = val.location.split(',');
+								val.longitude = arr[0]*1;
+								val.latitude = arr[1]*1;
+								let obj = {
+								        latitude: val.latitude,
+								        longitude: val.longitude,
+								        iconPath: '../../../../static/address.png',
+										width: 35,
+										height: 35,
+									}
+									this.covers.push(obj);
+									// this.$forceUpdate();
+									
+							})
+							console.log(this.covers)
+							this.$refs.search.open();
+						}else{
+							uni.showToast({
+								icon:'none',
+								title:'请填写合适的位置'
+							})
+						}
+						// this.$forceUpdate();
+					}
+				})
+			},
+			 // geoCode() {
+			 //        var address  = document.getElementById('address').value;
+			 //        geocoder.getLocation(address, function(status, result) {
+			 //            if (status === 'complete'&&result.geocodes.length) {
+			 //                var lnglat = result.geocodes[0].location
+			 //                console.log(lnglat)
+			 //            }else{
+			 //                console.log('根据地址查询位置失败');
+			 //            }
+			 //        });
+			 //    },
+			back(){
+				uni.navigateBack({
+					delta:1
+				})
+			},
+			tap(e){
+				console.log('111')
+				this.latitude =  e.detail.latitude;
+				this.longitude =  e.detail.longitude;
+				let obj = [
+					{
+						latitude: e.detail.latitude,
+						longitude: e.detail.longitude,
+						iconPath: '../../../../static/address.png',
+						width: 35,
+						height: 35
+					}
+				]
+				this.covers = obj;
+				uni.showToast({
+					icon:'none',
+					title:`当前经度:${e.detail.latitude};纬度:${e.detail.longitude}`
+				})
+				console.log(e.detail)
+			},
+			update(){
+				uni.showModal({
+					content:'确定修改为此经纬度吗?',
+					success: (res) => {
+						if(res.confirm){
+							getApp().globalData.editAddress = {latitude:this.latitude,longitude:this.longitude};
+							uni.navigateBack({
+								delta:1
+							})
+						}
+					}
+				})
+				
+			}
+		}
+	}
+</script>
+
+<style >
+	.search{
+		width: 700rpx;
+		height: 70rpx;
+		position: fixed;
+		top: 250rpx;
+		left: 25rpx;
+		background-color: #222D32;
+		padding-left: 20rpx;
+		border-radius: 10rpx;
+	}
+	.search_text{
+		font-size: 26rpx;
+		color: white;
+		height: 70rpx;
+		line-height: 70rpx;
+		/* text-align: 15rpx; */
+	}
+.active {
+		background-color: #24BAFF !important;
+	}
+
+	.top_hr {
+		width: 750rpx;
+		height: 160rpx;
+		/* background-color: red; */
+		background-image: linear-gradient(to bottom, #24B9FF, #7FD6FF);
+		/* padding: 0 55rpx; */
+	}
+
+	.rox {
+		position: fixed;
+		top: 0;
+		width: 750rpx;
+	}
+
+	.header {
+		background-image: linear-gradient(to bottom, #24B9FF, #7FD6FF);
+		width: 750rpx;
+		height: 160rpx;
+		background-color: green;
+	}
+
+	.header_top {
+		width: 750rpx;
+		height: 44px;
+	}
+
+	.header_box {
+		width: 720rpx;
+		/* height: 100rpx; */
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding-left: 15rpx;
+		/* box-sizing: border-box; */
+		/* padding: 0 40rpx; */
+		/* background-color: red; */
+		
+	}
+
+	.header_box_left {
+		width: 235rpx;
+		font-size: 32rpx;
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		/* background-color: #007AFF; */
+	}
+
+	.header_box_left_text {
+		color: white;
+	}
+
+	.header_box_left_img {
+		width: 45rpx;
+		height: 45rpx;
+	}
+
+	.header_box_right {
+		/* background-color: #4CD964; */
+		width: 220rpx;
+		/* height: 15rpx; */
+		font-size: 32rpx;
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row-reverse;
+		align-items: center;
+	}
+
+	.header_box_title {
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		width: 250rpx;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+		font-size: 36rpx;
+
+	}
+	.header_box_right_text{
+		color: white;
+		font-size: 30rpx;
+	}
+	
+	.search_con{
+		width: 750rpx;
+		background-color: white;
+		padding-top: 20rpx;
+		border-top-left-radius: 20rpx;
+		border-top-right-radius: 20rpx;
+		/* padding-left: 20rpx; */
+	}
+	.search_item{
+		width: 750rpx;
+		border-bottom-width: 2rpx;
+		border-bottom-style: solid;
+		border-bottom-color: #333333;
+		padding: 20rpx 20rpx;
+	}
+	.search_item_icon{
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+	}
+	.search_item_icon_name{
+		font-size: 27rpx;
+		/* color: white; */
+		margin-right: 15rpx;
+	}
+	.search_item_icon_address{
+		font-size: 26rpx;
+		/* color: white; */
+	}
+</style>

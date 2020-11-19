@@ -1,0 +1,32 @@
+<template>
+	<view>
+		<view style="width: 750rpx;" :style="{height:Height+'px'}">
+			<web-view style="width: 750rpx;" :style="{height:Height+'px'}" src="https://m.amap.com/picker/?keywords=parameter1&amp;zoom=parameter2&amp;center=parameter3&amp;radius=parameter4&amp;total=parameter5&amp&key=8903762e133e9aeab14dc43dc3e5a039"></web-view>
+		</view>
+	
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				Height:0
+			}
+		},
+		mounted() {
+			uni.getSystemInfo({
+				success: (res) => {
+							this.Height = res.windowHeight;
+				}
+			})	
+		},
+		methods: {
+			
+		}
+	}
+</script>
+
+<style>
+
+</style>

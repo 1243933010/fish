@@ -1,0 +1,133 @@
+{
+  "pages": [
+    "pages/club/club",
+    "pages/index/index",
+    "pages/club/salon",
+    "pages/club/message/map/map",
+    "pages/selfMedia/selfMedia",
+    "pages/me/me",
+    "pages/club/message/message",
+    "pages/club/surroundings",
+    "pages/club/weather",
+    "pages/club/fieldService",
+    "pages/club/announcement",
+    "pages/club/share",
+    "pages/login/login",
+    "pages/login/register",
+    "pages/me/setting",
+    "pages/me/editUserInfo",
+    "pages/club/fishing",
+    "pages/club/friendList/friendList",
+    "pages/club/friendList/addFirend",
+    "pages/club/friendList/noticeList",
+    "pages/club/friendList/firendRoom",
+    "pages/club/friendList/firendCircle/firendCircle",
+    "pages/club/friendList/firendCircle/addVideo",
+    "pages/club/friendList/firendCircle/addImage",
+    "pages/club/friendList/firendCircle/detail",
+    "pages/club/message/onlineList",
+    "pages/club/message/userPage",
+    "pages/me/merchant/merchant",
+    "pages/club/formPage/formPage",
+    "pages/me/merchant/fishTicket/fishTicket",
+    "pages/me/returnFish/returnFish",
+    "pages/me/order/order",
+    "pages/me/merchant/edit/edit",
+    "pages/club/pinchFish/pinchFish",
+    "pages/club/pinchFish/Initiate",
+    "pages/club/pinchFish/participate",
+    "pages/club/pinchFish/pinchFishDetail",
+    "pages/club/pinchFish/rank",
+    "pages/me/merchant/game/game",
+    "pages/me/merchant/game/gameDetail/gameDetail",
+    "pages/club/game/game",
+    "pages/me/merchant/edit/editMap",
+    "pages/pay/pay",
+    "pages/index/AudioDetail/AudioDetail",
+    "pages/club/fishShop/fishShop",
+    "pages/index/addVideo/addVideo",
+    "pages/me/merchant/fishOrder/fishOrder",
+    "pages/me/merchant/gameOrder/gameOrder",
+    "pages/me/merchant/balance/balance",
+    "pages/me/money/money",
+    "pages/me/money/withdraw",
+    "pages/me/money/status",
+    "pages/club/shareVideoDetail",
+    "pages/me/merchant/game/addGame",
+    "pages/club/fishingDetail",
+    "pages/club/pinchFish/initiateDetail",
+    "pages/me/userPage/release",
+    "pages/me/userPage/fens",
+    "pages/me/userPage/attention",
+    "pages/me/userPage/releaseDetail",
+    "pages/club/friendList/firendPage",
+    "pages/me/merchant/bulletinBoard/bulletinBoard",
+    "pages/me/merchant/fieldService/fieldService",
+    "pages/firend/firend",
+    "pages/me/merchant/gameOrder/detail",
+    "pages/me/order/fishDetail",
+    "pages/me/order/gameDetail",
+    "pages/login/findPwd",
+    "pages/alipay/alipay",
+    "pages/me/userPage/videoPage",
+    "pages/club/pinchFish/editPinchFish",
+    "pages/me/merchant/game/gameDetail/editGameDetail",
+    "pages/me/merchant/fishOrder/detail"
+  ],
+  "subPackages": [
+    {
+      "root": "pagesA",
+      "pages": [
+        "userMoney/userMoney"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#B1B1B1",
+    "selectedColor": "#FD6801",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "height": "50",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabbar/info.png",
+        "selectedIconPath": "static/tabbar/info_select.png",
+        "text": "自媒体"
+      },
+      {
+        "pagePath": "pages/club/club",
+        "iconPath": "static/tabbar/club.png",
+        "selectedIconPath": "static/tabbar/club_select.png",
+        "text": "俱乐部"
+      },
+      {
+        "pagePath": "pages/firend/firend",
+        "iconPath": "static/tabbar/contacts.png",
+        "selectedIconPath": "static/tabbar/xuan_contacts.png",
+        "text": "通讯录"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "static/tabbar/mind.png",
+        "selectedIconPath": "static/tabbar/mind_select.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "test"
+    }
+  },
+  "uniStatistics": {
+    "enable": true
+  },
+  "usingComponents": {}
+}

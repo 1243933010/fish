@@ -1,0 +1,1 @@
+<view><view class="top_hr"></view><view style="position:fixed;top:0;width:100%;"><headers vue-id="00735f14-1" title="鱼票订单" leftIcon="{{true}}" bind:__l="__l"></headers></view></view>

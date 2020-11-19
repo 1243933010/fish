@@ -1,0 +1,783 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+
+		{
+			"path": "pages/club/club",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		},
+
+		{
+			"path": "pages/index/index",
+			"style": {
+				// "navigationBarTitleText": "多媒体"
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/club/salon",
+			"style": {
+				// "navigationStyle":"custom",
+				"backgroundColor": "#33BEFF",
+				"backgroundColorTop": "#33BEFF",
+				"navigationBarBackgroundColor": "#33BEFF",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "沙龙",
+				"app-plus": {
+					"softinputMode": "adjustPan",
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/club/message/map/map",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/selfMedia/selfMedia",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}
+
+		, {
+			"path": "pages/me/me",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/message/message",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}
+
+
+
+		, {
+			"path": "pages/club/surroundings",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/weather",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/fieldService",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/club/announcement",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/share",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/login/register",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/setting",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/editUserInfo",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/fishing",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}, {
+			"path": "pages/club/friendList/friendList",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}
+
+		, {
+			"path": "pages/club/friendList/addFirend",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/friendList/noticeList",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/friendList/firendRoom",
+			"style": {
+				"backgroundColor": "#33BEFF",
+				"backgroundColorTop": "#33BEFF",
+				"navigationBarBackgroundColor": "#33BEFF",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "沙龙",
+				"app-plus": {
+					"softinputMode": "adjustPan",
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/friendList/firendCircle/firendCircle",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/friendList/firendCircle/addVideo",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		}, {
+			"path": "pages/club/friendList/firendCircle/addImage",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		}, {
+			"path": "pages/club/friendList/firendCircle/detail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		}, {
+			"path": "pages/club/message/onlineList",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/message/userPage",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/merchant",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/formPage/formPage",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/fishTicket/fishTicket",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/returnFish/returnFish",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/me/order/order",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/edit/edit",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/pinchFish/pinchFish",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/pinchFish/Initiate",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/pinchFish/participate",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/pinchFish/pinchFishDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/pinchFish/rank",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/game/game",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/game/gameDetail/gameDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/game/game",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/edit/editMap",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/index/AudioDetail/AudioDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none",
+					"softinputMode": "adjustResize"
+				}
+			}
+		}, {
+			"path": "pages/club/fishShop/fishShop",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/index/addVideo/addVideo",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/fishOrder/fishOrder",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/gameOrder/gameOrder",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/balance/balance",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/money/money",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/money/withdraw",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/money/status",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/club/shareVideoDetail",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}, {
+			"path": "pages/me/merchant/game/addGame",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/club/fishingDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/club/pinchFish/initiateDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/userPage/release",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/userPage/fens",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/userPage/attention",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/userPage/releaseDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/club/friendList/firendPage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/merchant/bulletinBoard/bulletinBoard",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/merchant/fieldService/fieldService",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/firend/firend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/merchant/gameOrder/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/order/fishDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/me/order/gameDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/login/findPwd",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"softinputMode": "adjustResize",
+					"bounce": "none"
+				}
+			}
+
+		}, {
+			"path": "pages/alipay/alipay",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/me/userPage/videoPage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/club/pinchFish/editPinchFish",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/me/merchant/game/gameDetail/editGameDetail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/me/merchant/fishOrder/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/me/merchant/edit/searchMap",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}
+	    ,{
+            "path" : "pages/firend/attention",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/firend/fens",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/firend/video",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/firend/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+    ],
+	"subPackages": [{
+		"root": "pagesA",
+		"pages": [{
+				"path": "userMoney/userMoney",
+				"style": {
+					"navigationStyle": "custom",
+					"app-plus": {
+						"bounce": "none"
+					}
+				}
+			}
+
+			, {
+				"path": "userPageDetail/userPageDetail",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "custom",
+					"app-plus": {
+						"bounce": "none"
+					}
+				}
+
+			}
+		]
+	}],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#B1B1B1",
+		"selectedColor": "#FD6801",
+		"borderStyle": "black",
+		"backgroundColor": "#FFFFFF",
+		"height": "50",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/info.png",
+				"selectedIconPath": "static/tabbar/info_select.png",
+				"text": "自媒体"
+			}, {
+				"pagePath": "pages/club/club",
+				"iconPath": "static/tabbar/club.png",
+				"selectedIconPath": "static/tabbar/club_select.png",
+				"text": "俱乐部"
+			},
+			{
+				"pagePath": "pages/firend/firend",
+				"iconPath": "static/tabbar/contacts.png",
+				"selectedIconPath": "static/tabbar/xuan_contacts.png",
+				"text": "通讯录"
+			},
+			{
+				"pagePath": "pages/me/me",
+				"iconPath": "static/tabbar/mind.png",
+				"selectedIconPath": "static/tabbar/mind_select.png",
+				"text": "我的"
+			}
+		]
+	}
+}

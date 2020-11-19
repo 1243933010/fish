@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "w-picker": "/components/w-picker/w-picker",
+    "headers": "/components/header"
+  }
+}

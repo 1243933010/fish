@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "popup": "/components/uni-popup/uni-popup",
+    "headers": "/components/header"
+  }
+}

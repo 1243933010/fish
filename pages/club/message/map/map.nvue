@@ -1,0 +1,1002 @@
+<template>
+	<view class="content">
+		<view class="weather">
+			<view class="top">
+				<view class="weather_con_address" @click="chooseCity">
+					<image class="weather_con_address_img" src="../../../../static/switch.png" mode="widthFix"></image>
+					<text class="weather_con_address_text">{{city}}</text>
+				</view>
+				
+				<view class="inp">
+					<input class="inp_inp" @confirm="search" type="text" confirm-type="search" v-model="inp" placeholder="请输入您要搜索的内容" />
+					<uni-icons @click="search" class="inp_icon" type="search" size="25"></uni-icons>
+				</view>
+				<image @click="goMsg" class="message" src="../../../../static/index/message.png" mode="widthFix"></image>
+			</view>
+		</view>
+		<view class="page-body">
+			<view class="page-section page-section-gap">
+				<map  ref="map" 
+				:scale="13" 
+				@tap="mapTap" 
+				@regionchange="regionchange" 
+				:style="{height:Height+'px'}" 
+				id="navmap" 
+				class="map" 
+				@markertap="markertap" 
+				:latitude="latitude"
+				:longitude="longitude" 
+				:markers="covers"
+				></map>
+			</view>
+		</view>
+
+<!-- <view class="">
+	 <map style="width: 750rpx; height: 300px;" latitude="39.909" longitude="116.39742" :markers="testtest">
+</map> -->
+<!-- </view> -->
+		<uni-popup ref="detail"  type="bottom" :maskClick="false">
+			<view class="popup" >
+				<view class="popup_close">
+					<view class="popup_close_btn"><text @click="application" v-if="ground.is_setin==='1'">申请入驻</text></view>
+					<image @click="close" class="popup_close_img" src="../../../../static/close.png" mode=""></image>
+				</view>
+				<view class="popup_title">
+					<view class="popup_title_name">
+						<text class="popup_title_name_text">{{ground.ground_name}}</text>
+						<text class="shalong" @click="goTo">去沙龙</text>
+					</view>
+					
+					<!-- <text class="popup_title_letter">1.5km</text> -->
+				</view>
+				<view class="popup_address">
+					<view class="popup_address_left">
+						<image class="popup_address_img" src="../../../../static/address.png" mode=""></image>
+						<text class="popup_address_text">{{ground.area_name}}{{ground.ground_address}}</text>
+					</view>
+					<view class="popup_address_btn" @click="toMap"><text class="popup_address_btn_text">去这里</text></view>
+				</view>
+				<view class="popup_fish">
+					<text class="popup_fish_title">主要鱼种：</text>
+					<text class="popup_fish_text">{{ground.fish_species}}</text>
+				</view>
+				<view class="popup_fish">
+					<text class="popup_fish_title">收费标准：</text>
+					<text class="popup_fish_text">{{ground.charging_rules}}</text>
+				</view>
+				<view class="popup_img_list">
+					<image class="popup_img_list_img" 
+					v-for="(item,index) in ground.ground_images"
+					 :key="index"
+					:src="'http://47.95.39.75:9706'+item" mode="" @click="seeImg"></image>
+					
+					<!-- <image class="popup_img_list_img" src="../../static/logo.png" mode=""></image> -->
+				</view>
+			</view>
+		</uni-popup>
+		
+		
+		<uni-popup ref="popup"  type="bottom">
+			        <view class="box">
+						<scroll-view  scroll-y="true" class="scroll-Y">
+			              <view class="province">
+			                   		<text class="province_text" 
+			                   		v-for="(item,index) in provinceList" 
+			                   		:key="index"
+									:class="provinceIndex===index?'active':''"
+									@click="chooseProvince(item,index)">{{item.areaName}}</text>
+			              </view>
+						  </scroll-view> 
+						  <scroll-view  scroll-y="true" class="scroll-Y">
+						  <view class="city">
+						       		<text class="city_text" 
+						       		v-for="(item,index) in cityList" 
+						       		:key="index"
+									:class="cityIndex===index?'active':''"
+									@click="changeCity(item,index)">{{item.areaName}}</text>
+						  </view>
+						  </scroll-view>
+						    <scroll-view  scroll-y="true" class="scroll-Y">
+						  <view class="city area">
+						       		<text class="city_text area_text" 
+						       		v-for="(item,index) in areaList" 
+						       		:key="index"
+									:class="areaIndex===index?'active':''"
+									@click="changeArea(item,index)">{{item.areaName}}</text>
+						  </view>
+						  </scroll-view>
+			        </view>
+		</uni-popup>
+		
+		
+		<uni-popup ref="search"  type="bottom">
+			<view class="search_con">
+				<scroll-view scroll-y="true" style="height: 600rpx;">
+				    <view class="search_item" v-for="(item,index) in searchList" :key="index" @click="chooseSearch(item,index)">
+				    	<view class="search_item_icon">
+				    		<text class="search_item_icon_name">{{item.ground_name}}</text>
+				    		<text class="search_item_icon_address">{{item.ground_address}}</text>
+				    	</view>
+				    </view>
+				</scroll-view>
+			</view>
+	   </uni-popup>
+	</view>
+</template>
+
+<script>
+	import {
+		api
+	} from '../../../../util/api.js';
+	import {
+		$Post
+	} from '../../../../util/request.js'
+	var baseUrl = 'http://47.95.39.75:9706/';
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	export default {
+	    components: {
+	        uniPopup,
+	        uniPopupMessage,
+	        uniPopupDialog
+	    },
+		data() {
+			return {
+				testtest: [{
+				                latitude: 39.909,
+				                longitude: 116.39742,
+				                iconPath: '../../../../../static/location.png'
+				            }, {
+				                latitude: 39.90,
+				                longitude: 116.39,
+				                iconPath: '../../../../../static/location.png'
+				            }],
+				Height: '',
+				title: 'Hello',
+				id: 1, // 使用 marker点击事件 需要填写id
+				latitude: 39.909,
+				longitude: 116.39742,
+				covers: [],
+				flog: false,
+				city: '北京',
+				ground:{},
+				provinceList:[],
+				cityList:[],
+				areaList:[],
+				temporaryStr:'',
+				inp:'',
+				searchList:[],
+				provinceIndex:0,
+				cityIndex:0,
+				areaIndex:0
+			}
+		},
+		onHide() {
+			this.$refs.detail.close();
+		},
+		async created() {
+			uni.getSystemInfo({
+				success: (res) => {
+					// -75
+					this.Height = res.screenHeight - 70-30;
+				}
+			})
+            try{
+            	await this.getAddress();
+            }catch(e){
+            	console.log(e)
+            	//TODO handle the exception
+            }
+			
+			let res = await this.getGroundList();
+			this.covers = [];
+			if (res.length > 0) {
+				res.forEach((val, ind) => {
+					let obj = {
+						id: 123,
+						latitude: 39.909,
+						longitude: 116.39742,
+						iconPath: '../../../../static/address.png',
+						
+						width: 25,
+						height: 25,
+						label: {
+							content: 'label1',
+							color: '#FF7C34',
+							bgColor: 'white',
+							padding: 5,
+							x: 0,
+							y: 0
+
+						}
+					}
+					obj.id = val.id;
+					obj.latitude = val.ground_atitude;
+					obj.longitude = val.ground_longitude;
+					obj.label.content = val.ground_name;
+					this.covers.push(obj)
+				})
+				let Obj = {
+					id: 123,
+					latitude: 39.909,
+					longitude: 116.39742,
+					iconPath: '../../../../static/user_address.png',
+					width: 30,
+					height: 30
+				}
+				Obj.id = 123;
+				Obj.latitude = this.latitude;
+				Obj.longitude = this.longitude;
+				this.covers.push(Obj);
+			}
+			
+		},
+		methods: {
+			chooseSearch(item,index){
+				// console.log(item)
+			    this.covers.forEach(async(val,ind)=>{
+					if(item.id===val.id){
+						let res = await this.getDetail(val.id);
+						let arr = res.ground_images.split(',');
+						res.ground_images = arr;
+						this.ground = res;
+						// console.log(res);
+						// console.log(e.detail.markerId)
+						this.$refs.search.close();
+						this.$refs.detail.open();
+						this.flog = true;
+					}
+				})
+			},//点击搜索到得数据
+			goMsg(){
+				uni.navigateTo({
+					url:'../../message/message'
+				})
+			},//右上角信封
+			seeImg(){
+				uni.previewImage({
+					urls:this.ground.ground_images
+				})
+			},//查看图片预览
+			application(){
+				// console.log('545454')
+				uni.navigateTo({
+					url:`../../formPage/formPage?id=${this.ground.id}`
+				})
+			},//申请入驻
+			goTo(){
+				uni.setStorageSync('beforeUrl',`/pages/club/salon?id=${this.ground.id}`);
+				// console.log(this.ground)
+				uni.navigateTo({
+					url:`../../salon?id=${this.ground.id}`
+				})
+			},//去沙龙
+			regionchange(){},
+			getAddress() {
+				// console.log('88888')
+				// try{
+					return new Promise((reslove, reject) => {
+						uni.getLocation({
+							type: 'gcj02',
+							// #ifdef APP-NVUE
+							geocode: true,
+							// #endif
+							success: (res) => {
+								// console.log(getApp().globalData.city);
+								this.city=getApp().globalData.city;
+								// console.log(res);
+								if(res.address){
+									getApp().globalData.city = res.address.city;
+									this.city = res.address.city;
+								}
+								
+								this.latitude = res.latitude;
+								this.longitude = res.longitude;
+								reslove();
+							},
+							fail: (err) => {
+								console.log(err)
+								getApp().globalData.city = '暂无地址'
+								reject();
+							}
+					
+						})
+					})
+				// }catch(e){
+					// console.log(e)
+					//TODO handle the exception
+				// }
+			},
+			getGroundList() {
+				let obj = {
+					offset: 1,
+					limit: 1000,
+					lng: this.latitude,
+					lat: this.longitude
+				}
+				return new Promise((resolve, reject) => {
+					uni.request({
+						method: 'POST',
+						url: 'http://47.95.39.75:9706/api/Ground/GroundList',
+						data: obj,
+						header:{
+							"Content-Type":"application/x-www-form-urlencoded"
+						},
+						success(res) {
+							// console.log(res)
+							if (res.data.code !== 1) {
+								uni.showToast({
+									icon: 'none',
+									title: `${res.data.msg}`
+								})
+							} else {
+								resolve(res.data.data.list);
+							}
+
+						},
+						fail(err) {
+							reject(err)
+						}
+					})
+				})
+			},
+			getDetail(fishground_id){
+				let obj = {fishground_id}
+				return new Promise((resolve,reject)=>{
+					uni.request({
+						method: 'POST',
+						url: 'http://47.95.39.75:9706/api/Ground/GroundListinfo',
+						data: obj,
+						header:{
+							"Content-Type":"application/x-www-form-urlencoded"
+						},
+						success(res) {
+							if (res.data.code !== 1) {
+								uni.showToast({
+									icon: 'none',
+									title: '获取钓场详情失败'
+								})
+							} else {
+								resolve(res.data.data);
+							}
+					
+						},
+						fail(err) {
+							reject(err)
+						}
+					})
+				})
+			},
+			async markertap(e) {
+				// console.log(e, '----')
+				let res = await this.getDetail(e.detail.markerId);
+				let arr = res.ground_images.split(',');
+				res.ground_images = arr;
+				this.ground = res;
+				console.log(res);
+				console.log(e.detail.markerId)
+				this.$refs.detail.open();
+				this.flog = true;
+			},
+			async search() {
+				uni.hideKeyboard()
+				let obj = {offset:1,limit:10,class_name:'',keyword:this.inp,lng:'',lat:''};
+				let res = await this.Post('/api/Ground/GroundList',obj);
+				if(res.data.code===1){
+					this.$refs.popup.close();
+					this.searchList = res.data.data.list;
+					this.$refs.search.open();
+					console.log(res.data.data.list)
+				}else{
+					uni.showToast({
+						icon:'none',
+						title:'暂无数据'
+					})
+				}
+				// console.log(res);
+			},
+			mapTap(e) {
+				console.log(e)
+				this.$refs.detail.close();
+				this.flog = false;
+			},
+			close(){
+				console.log('222')
+				this.$refs.detail.close();
+			},
+			async chooseCity() {
+				// console.log('已点击')
+				this.temporaryStr = '';
+				let res = await this.getProvince();
+				this.provinceList = res;
+				let cityData =  await this.getCity(this.provinceList[0].areaId)
+				this.cityList = cityData;
+				let areaData = await this.getArea(this.cityList[0].areaId);
+				this.areaList = areaData;
+				this.provinceIndex = 0;
+				this.cityIndex = 0;
+				this.areaIndex = 0;
+				this.$refs.popup.open();
+			},
+			getProvince(){
+				return new Promise((resolve, reject) => {
+					uni.request({
+						method: 'POST',
+						url: 'http://47.95.39.75:9706/api/Index/IndexArea',
+						data: {},
+						header:{
+							"Content-Type":"application/x-www-form-urlencoded"
+						},
+						dataType:'json',
+						success(res) {
+							if (res.data.code === 1) {
+								resolve(res.data.data);
+							}
+						},
+						fail(err) {
+							reject(err)
+						}
+					})
+				})
+			},
+			getCity(id){
+				return new Promise((resolve, reject) => {
+					uni.request({
+						method: 'POST',
+						url: 'http://47.95.39.75:9706/api/Index/IndexArea',
+						data: {id},
+						header:{
+							"Content-Type":"application/x-www-form-urlencoded"
+						},
+						dataType:'json',
+						success(res) {
+							// console.log(res.data.data)
+							if (res.data.code === 1) {
+								resolve(res.data.data);
+							}
+						},
+						fail(err) {
+							reject(err)
+						}
+					})
+				})
+			},
+			getArea(id){
+				return new Promise((resolve, reject) => {
+					uni.request({
+						method: 'POST',
+						url: 'http://47.95.39.75:9706/api/Index/IndexArea',
+						data: {id},
+						header:{
+							"Content-Type":"application/x-www-form-urlencoded"
+						},
+						dataType:'json',
+						success(res) {
+							// console.log(res)
+							if (res.data.code === 1) {
+								resolve(res.data.data);
+							}
+				
+						},
+						fail(err) {
+							reject(err)
+						}
+					})
+				})
+			},
+			async chooseProvince(item,index){
+				this.provinceIndex = index;
+				let cityData =  await this.getCity(item.areaId)
+				this.cityList = cityData;
+				let areaData = await this.getArea(this.cityList[0].areaId);
+				this.areaList = areaData;
+				this.temporaryStr = item.areaName;
+				this.cityIndex = 0;
+				this.areaIndex = 0;
+			},
+			async changeCity(item,index){
+				this.cityIndex = index;
+				let areaData = await this.getArea(item.areaId);
+				this.areaList = areaData;
+				this.areaIndex = 0;
+			},
+			async changeArea(item,index){
+				this.areaIndex = index;
+				let arr = item.center.split(',');
+				this.city = this.temporaryStr;
+				if(!this.temporaryStr){this.city='北京'}
+				this.latitude = arr[1];
+				this.longitude = arr[0];
+				this.$refs.popup.close();
+				console.log(this.city)
+			},
+			toMap(){
+				// console.log(this.ground);
+				let ground = this.ground;
+				let address = `${ground.area_name}${ground.ground_address}`;
+				// console.log(address)
+				// console.log(ground.ground_atitude,ground.ground_longitude,address)
+				this.toMapAPP(ground.ground_atitude,ground.ground_longitude,address)
+				
+			},//打开地图
+			toMapAPP(latitude, longitude, name) {
+				let url = "";
+				if (plus.os.name == "Android") { //判断是安卓端
+					plus.nativeUI.actionSheet({ //选择菜单
+						title: "选择地图应用",
+						cancel: "取消",
+						buttons: [
+						// 	{
+						// 	title: "腾讯地图"
+						// },
+						{
+							title: "百度地图"
+						}, {
+							title: "高德地图"
+						}]
+					}, function(e) {
+						switch (e.index) {
+							//下面是拼接url,不同系统以及不同地图都有不同的拼接字段
+							// case 1:
+							// 	//注意referer=xxx的xxx替换成你在腾讯地图开发平台申请的key
+							// 	url = `qqmap://map/geocoder?coord=${latitude},${longitude}&referer=xxx`;
+							// 	break;
+							case 1:
+								url =
+									`baidumap://map/marker?location=${latitude},${longitude}&title=${name}&coord_type=gcj02&src=andr.baidu.openAPIdemo`;
+								break;
+							case 2:
+								url =
+									`androidamap://viewMap?sourceApplication=appname&poiname=${name}&lat=${latitude}&lon=${longitude}&dev=0`;
+								break;
+							default:
+								break;
+						}
+						if (url != "") {
+							url = encodeURI(url);
+							//plus.runtime.openURL(url,function(e){})调起手机APP应用
+							plus.runtime.openURL(url, function(e) {
+								plus.nativeUI.alert("本机未安装指定的地图应用");
+							});
+						}
+					})
+				} else {
+					// iOS上获取本机是否安装了百度高德地图，需要在manifest里配置
+					// 在manifest.json文件app-plus->distribute->apple->urlschemewhitelist节点下添加
+					//（如urlschemewhitelist:["iosamap","baidumap"]）  
+					plus.nativeUI.actionSheet({
+						title: "选择地图应用",
+						cancel: "取消",
+						buttons: [{
+							title: "腾讯地图"
+						}, {
+							title: "百度地图"
+						}, {
+							title: "高德地图"
+						}]
+					}, function(e) {
+						switch (e.index) {
+							case 1:
+								url = `qqmap://map/geocoder?coord=${latitude},${longitude}&referer=xxx`;
+								break;
+							case 2:
+								url =
+									`baidumap://map/marker?location=${latitude},${longitude}&title=${name}&content=${name}&src=ios.baidu.openAPIdemo&coord_type=gcj02`;
+								break;
+							case 3:
+								url =
+									`iosamap://viewMap?sourceApplication=applicationName&poiname=${name}&lat=${latitude}&lon=${longitude}&dev=0`;
+								break;
+							default:
+								break;
+						}
+						if (url != "") {
+							url = encodeURI(url);
+							plus.runtime.openURL(url, function(e) {
+								plus.nativeUI.alert("本机未安装指定的地图应用");
+							});
+						}
+					})
+				}
+			},
+			Post(url,data){
+				let res = uni.getStorageSync('userinfo');
+				// console.log(res)
+					return new Promise((resolve,reject)=>{
+						uni.request({
+							method:'POST',
+							url:baseUrl+url,
+							data,
+							header:{
+								'content-type':'application/x-www-form-urlencoded',
+								'token':res.token},
+							success:(res)=>{
+								// console.log(res)
+								if(res.data.code===401){
+									setTimeout(()=>{
+										uni.reLaunch({
+											url:'/pages/login/login'
+										})
+									},500)
+								}
+								resolve(res);
+							},fail:(err)=>{
+								// console.log(err);
+								reject(err)
+							}
+						})
+					})
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.shalong{
+		background-color: #44C4FF;
+		color: white;
+		font-size: 27rpx;
+		border-radius: 5rpx;
+		padding: 10rpx 20rpx;
+		/* margin-left: 20rpx; */
+	}
+	.active{
+		color: red;
+	}
+	.search_con{
+		width: 750rpx;
+		background-color: white;
+		padding-top: 20rpx;
+		border-top-left-radius: 20rpx;
+		border-top-right-radius: 20rpx;
+		/* padding-left: 20rpx; */
+	}
+	.search_item{
+		width: 750rpx;
+		border-bottom-width: 2rpx;
+		border-bottom-style: solid;
+		border-bottom-color: red;
+		padding: 10rpx 20rpx;
+	}
+	.search_item_icon{
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+	}
+	.search_item_icon_name{
+		font-size: 27rpx;
+		/* color: white; */
+		margin-right: 15rpx;
+	}
+	.search_item_icon_address{
+		font-size: 26rpx;
+		/* color: white; */
+	}
+	.popup_close{
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		margin-bottom: 20rpx;
+	}
+	.popup_close_btn{
+		font-size: 28rpx;
+	}
+	.popup_close_img{
+	   width: 40rpx;
+	   height: 40rpx;
+	}
+	.switch{
+		font-size: 25rpx;
+	}
+	.box{
+		width: 750rpx;
+		background-color: white;
+		border-top-left-radius: 20rpx;
+		border-top-right-radius: 20rpx;
+		/* justify-content: space-between; */
+		padding: 30rpx 0;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+	}
+	.scroll-Y{
+		width: 250rpx;
+		height: 300px;
+	}
+	.province{
+		width: 250rpx;
+		/* height: 300rpx; */
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex-direction: column;
+		/* #endif */
+		align-items: center;
+		margin-right: 0rpx;
+		text-align: center;
+	}
+	.province_text{
+		margin-bottom: 40rpx;
+		font-size: 30rpx;
+	}
+	.city{
+		width: 250rpx;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex-direction: column;
+		/* #endif */
+		align-items: center;
+		margin-right: 0rpx;
+		text-align: center;
+	}
+	.city_text{
+		margin-bottom: 40rpx;
+		font-size: 30rpx;
+	}
+	.popup {
+		width: 710rpx;
+		background-color: white;
+		position: fixed;
+		bottom: 20rpx;
+		margin-left: 20rpx;
+		border-radius: 15rpx;
+		padding: 20rpx;
+	}
+
+	.popup_title {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 20rpx;
+		/* width: 600rpx; */
+	}
+	
+	.popup_title_name{
+		width: 670rpx;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.popup_title_name_text {
+		font-size: 38rpx;
+		color: black;
+	}
+
+	.popup_title_letter {
+		font-size: 30rpx;
+	}
+
+	.popup_address {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		width: 700rpx;
+		height: 100rpx;
+		border-bottom-width: 1px;
+		border-bottom-color: #FF7C34;
+		margin-bottom: 30rpx;
+	}
+	.popup_address_btn{
+		width: 150rpx;
+		padding-top: 20rpx;
+	}
+	.popup_address_btn_text{
+		/* font-size: 30rpx; */
+		width: 130rpx;
+		background-color: #44C4FF;
+		color: white;
+		font-size: 25rpx;
+		border-radius: 5rpx;
+		padding: 10rpx 24rpx;
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.popup_address_left{
+		/* #ifndef APP-PLUS */
+		display: flex;
+		/* #endif */
+		width: 500rpx;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.popup_address_img {
+		width: 70rpx;
+		height: 70rpx;
+	}
+
+	.popup_address_text {
+		font-size: 28rpx;
+		width: 450rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.popup_fish {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		margin-bottom: 30rpx;
+	}
+
+	.popup_fish_title {
+		font-size: 30rpx;
+	}
+
+	.popup_fish_text {
+		font-size: 30rpx;
+	}
+
+	.popup_img_list {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	.popup_img_list_img {
+		width: 150rpx;
+		height: 150rpx;
+		margin-right: 15rpx;
+		margin-bottom: 10rpx;
+	}
+
+
+
+	.content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+
+
+	.text-area {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		justify-content: center;
+	}
+
+	.title {
+		font-size: 36rpx;
+		color: #8f8f94;
+	}
+
+	.map {
+		width: 750rpx;
+		/* height: 400px; */
+	}
+
+	.weather {
+		background-color: #44C4FF;
+		padding-top: 45px;
+		/* height: 70px; */
+	}
+
+	.top {
+		width: 750rpx;
+		margin-bottom: 20rpx;
+		/* background-color: #44C4FF; */
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 20rpx;
+	}
+
+	.inp {
+		width: 480rpx;
+		background-color: white;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		border-radius: 20rpx;
+		padding: 10rpx 0rpx;
+	}
+
+	.inp_inp {
+		width: 430rpx;
+		font-size: 26rpx;
+		padding-left: 20rpx;
+	}
+
+	.inp_icon {
+		/* padding-right: 20rpx; */
+	}
+
+	.aquod {
+		width: 70rpx;
+		height: 70rpx;
+	}
+
+	.message {
+		width: 65rpx;
+		height: 65rpx;
+	}
+
+	.weather_con {
+		width: 700rpx;
+		margin-left: 25rpx;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding: 40rpx 0;
+		border-bottom-width: 1px;
+		border-bottom-color: white;
+	}
+
+	.weather_con_address {
+		background-color: rgba(27, 145, 218, 0.5);
+		border-radius: 20rpx;
+		padding: 5rpx 10rpx;
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		margin-right: 15rpx;
+	}
+
+	.weather_con_address_img {
+		width: 40rpx;
+		height: 40rpx;
+		margin-right: 5rpx;
+	}
+
+	.weather_con_address_text {
+		color: white;
+		font-size: 30rpx;
+	}
+
+	.weather_con_type_text {
+		color: white;
+		font-size: 30rpx;
+	}
+
+	.weather_con_num_top {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.weather_con_num_top_text {
+		color: white;
+		font-size: 35rpx;
+	}
+
+	.weather_con_num_top_label {
+		font-size: 30rpx;
+		color: white;
+		margin-left: 20rpx;
+	}
+</style>

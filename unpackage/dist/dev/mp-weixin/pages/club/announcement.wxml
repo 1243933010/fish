@@ -1,0 +1,1 @@
+<view><view style="width:100%;height:160rpx;"></view><view style="position:fixed;top:0;width:100%;"><headers vue-id="3ae5050f-1" title="公告" leftIcon="{{true}}" bind:__l="__l"></headers></view><view class="msg"><text>{{ground_intro}}</text></view></view>

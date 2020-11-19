@@ -1,0 +1,346 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.fish.data-v-800d81d4 {
+  width: 700rpx;
+  margin: 0 auto;
+  background: white;
+  box-sizing: border-box;
+  padding: 40rpx 20rpx;
+  border-radius: 20rpx;
+}
+.fish input.data-v-800d81d4 {
+  width: 90%;
+  margin: 40rpx auto;
+  border: 1px solid #333333;
+  border-radius: 15rpx;
+  text-indent: 15rpx;
+  padding: 15rpx 0;
+}
+.fish view.data-v-800d81d4 {
+  width: 70%;
+  margin: 0 auto;
+  background: #007AFF;
+  text-align: center;
+  font-size: 26rpx;
+  color: white;
+  text-align: center;
+  border-radius: 15rpx;
+  box-sizing: border-box;
+  padding: 15rpx 0;
+}
+.fish_acitve.data-v-800d81d4 {
+  background: #95B1C1;
+  border: none !important;
+  color: white !important;
+}
+.active.data-v-800d81d4 {
+  color: red;
+}
+.box.data-v-800d81d4 {
+  width: 750rpx;
+  background-color: white;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  /* justify-content: space-between; */
+  padding: 30rpx 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.scroll-Y.data-v-800d81d4 {
+  width: 250rpx;
+  height: 300px;
+}
+.province.data-v-800d81d4 {
+  width: 250rpx;
+  /* height: 300rpx; */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-right: 0rpx;
+  text-align: center;
+}
+.province_text.data-v-800d81d4 {
+  margin-bottom: 40rpx;
+  font-size: 30rpx;
+}
+.city.data-v-800d81d4 {
+  width: 250rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-right: 0rpx;
+  text-align: center;
+}
+.city_text.data-v-800d81d4 {
+  margin-bottom: 40rpx;
+  font-size: 30rpx;
+}
+.popup.data-v-800d81d4 {
+  width: 710rpx;
+  background-color: white;
+  position: fixed;
+  bottom: 20rpx;
+  margin-left: 20rpx;
+  border-radius: 15rpx;
+  padding: 20rpx;
+}
+.form.data-v-800d81d4 {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30rpx 20rpx;
+}
+.form .inp.data-v-800d81d4 {
+  font-size: 30rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-bottom: 20rpx;
+}
+.form .inp text.data-v-800d81d4 {
+  margin-right: 15rpx;
+  width: 30%;
+}
+.form .inp input.data-v-800d81d4 {
+  width: 70%;
+  border: 1px solid #808080;
+  border-radius: 8rpx;
+  padding: 15rpx 0;
+  text-indent: 10rpx;
+}
+.form .inp textarea.data-v-800d81d4 {
+  width: 70%;
+  height: 150rpx;
+  border: 1px solid #808080;
+  border-radius: 8rpx;
+  padding: 15rpx 0;
+  text-indent: 10rpx;
+}
+.form .inp view.data-v-800d81d4 {
+  width: 70%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+.form .inp .address.data-v-800d81d4 {
+  width: 28%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.form .inp .address text.data-v-800d81d4 {
+  width: 60%;
+}
+.form .inp .address image.data-v-800d81d4 {
+  width: 40rpx;
+}
+.form .inp .img_list.data-v-800d81d4 {
+  width: 70%;
+  overflow-x: scroll;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.form .inp .img_list image.data-v-800d81d4 {
+  width: 80rpx;
+  margin-right: 10rpx;
+}
+.form .inp .img_list .item.data-v-800d81d4 {
+  width: 100rpx;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.form .inp .img_list .item .delete.data-v-800d81d4 {
+  width: 25rpx;
+  position: absolute;
+  top: 0;
+  right: -10rpx;
+}
+.form .inp .img_list .item image.data-v-800d81d4 {
+  width: 100rpx;
+  margin-right: 15rpx;
+}
+.form .plda.data-v-800d81d4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.form .plda .map.data-v-800d81d4 {
+  width: 68%;
+  border: 1px solid #808080;
+  padding: 15rpx 0;
+  border-radius: 10rpx;
+  text-indent: 15rpx;
+}
+.form .image.data-v-800d81d4 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.form .image .image_title.data-v-800d81d4 {
+  font-size: 27rpx;
+}
+.form .image .img_list.data-v-800d81d4 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 20rpx 15rpx;
+}
+.form .image .img_list .item.data-v-800d81d4 {
+  width: 30%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+  margin-right: 20rpx;
+}
+.form .image .img_list .item image.data-v-800d81d4 {
+  width: 100%;
+}
+.form .image .img_list .item .delete.data-v-800d81d4 {
+  width: 30rpx;
+  position: absolute;
+  top: 0;
+  right: -10rpx;
+}
+.form .image .img_list image.data-v-800d81d4 {
+  width: 30%;
+}
+.form .fishList.data-v-800d81d4 {
+  width: 95%;
+  margin: 0 auto;
+  padding: 10rpx 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-align-self: flex-start;
+          align-self: flex-start;
+}
+.form .fishList .fish_item.data-v-800d81d4 {
+  width: 140rpx;
+  border: 1px solid #95B1C1;
+  border-radius: 8rpx;
+  margin: 10rpx 10rpx;
+  text-align: center;
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #333333;
+}
+.form .fishList .fish_add.data-v-800d81d4 {
+  width: 150rpx;
+  border: 1px solid #FF7B33;
+  border-radius: 8rpx;
+  margin: 10rpx 10rpx;
+  text-align: center;
+  padding: 10rpx 0;
+  font-size: 24rpx;
+  color: #FF7B33;
+}
+

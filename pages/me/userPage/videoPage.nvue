@@ -1,0 +1,43 @@
+<template>
+	<view>
+		<view class="video" >
+			<video id="myVideo" :style="{height:Height+'px'}" class="detail" :src="url" controls></video>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				url:'',
+				Height:0
+			}
+		},
+		onLoad(e) {
+			this.url  = e.url;
+			uni.getSystemInfo({
+				success: (data) => {
+					this.Height = data.windowHeight;
+				}
+			})
+			
+		},
+		onReady() {
+			let videoContext = uni.createVideoContext('myVideo')
+			videoContext.play();
+		},
+		methods: {
+			
+		}
+	}
+</script>
+
+<style>
+	.video{
+		width: 750rpx;
+	}
+	.detail{
+		width: 750rpx;
+	}
+</style>

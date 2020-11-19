@@ -1,0 +1,13 @@
+{
+  "backgroundColor": "#33BEFF",
+  "backgroundColorTop": "#33BEFF",
+  "navigationBarBackgroundColor": "#33BEFF",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "沙龙",
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "headers": "/components/header",
+    "recorder-manager": "/components/RecorderManager",
+    "popup": "/components/uni-popup/uni-popup"
+  }
+}
